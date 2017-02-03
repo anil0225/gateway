@@ -21,8 +21,8 @@ int main(int argc, char*argv[])
         if(platform_init() == 0)
         {
             char *json_path = argv[1];
-            GATEWAY_HANDLE gateway = Gateway_CreateFromJson(json_path);
-            if(gateway == NULL)
+            GATEWAY_HANDLE gw = Gateway_CreateFromJson(json_path);
+            if(gw == NULL)
             {
                 LogError("An error occurred while creating the gateway.");
                 result = 1;
@@ -39,7 +39,7 @@ int main(int argc, char*argv[])
                 }
 
                 printf("Gateway is quitting\r\n");
-                Gateway_Destroy(gateway);
+                Gateway_Destroy(gw);
             }
             platform_deinit();
         }
@@ -84,5 +84,5 @@ static bool validate_args(int argc, char* argv[])
 static void print_usage()
 {
     printf("\r\nUsage:\r\n"
-           "    nodejs_simple_sample <path to json>\r\n\r\n");
+           "    gw <path to json>\r\n\r\n");
 }
