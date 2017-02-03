@@ -4,21 +4,20 @@ set(config ./src/config.json )
 set(sources ./src/main.c ${config})
 set(headers)
 
-set_source_files_properties(${config} PROPERTIES  HEADER_FILE_ONLY ON)
+set_source_files_properties(${config} PROPERTIES HEADER_FILE_ONLY ON)
 
-include_directories(../../core/inc ${GW_INC})
+# include_directories(../../core/inc ${GW_INC})
 
-set(LIBS ${LIBS} gateway)
-
-add_executable(gateway ${headers} ${sources})
-target_link_libraries(gateway ${LIBS})
+add_executable(gw ${headers} ${sources})
+target_link_libraries(gw ${LIBS})
 
 # make gateway depend on other modules
-add_dependencies(gateway nodejs_binding logger)
+# add_dependencies(gw nodejs_binding logger)
 
-linkSharedUtil(gateway)
-install_broker(gateway ${CMAKE_CURRENT_BINARY_DIR}/$(Configuration) )
-copy_node_dll(gateway ${CMAKE_CURRENT_BINARY_DIR}/$(Configuration) )
-copy_gateway_dll(gateway ${CMAKE_CURRENT_BINARY_DIR}/$(Configuration) )
+# linkSharedUtil(gw)
+# install_broker(gw ${CMAKE_CURRENT_BINARY_DIR}/$(Configuration) )
+# copy_node_dll(gw ${CMAKE_CURRENT_BINARY_DIR}/$(Configuration) )
+# copy_gateway_dll(gw ${CMAKE_CURRENT_BINARY_DIR}/$(Configuration) )
 
-add_sample_to_solution(gateway)
+# add_sample_to_solution(gw)
+
