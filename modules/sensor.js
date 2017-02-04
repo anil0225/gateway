@@ -18,8 +18,7 @@ module.exports = {
                     'source': 'sensor'
                 },
                 content: new Uint8Array([
-                    Math.random() * 50,
-                    Math.random() * 50
+                    "foo"
                 ])
             });
         }, 500);
