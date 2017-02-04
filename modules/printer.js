@@ -12,7 +12,7 @@ module.exports = {
     },
 
     receive: function (message) {
-        console.log(`printer.receive - ${message.content.join(', ')}`);
+        console.log(`printer.receive - ${JSON.stringify(message)}`);
     },
 
     destroy: function () {
