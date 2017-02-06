@@ -6,7 +6,7 @@
   "author": "Microsoft",
   "license": "MIT",
   "dependencies": {
-    "azure-iot-device": "^1.0.6",
-    "azure-iot-device-amqp": "^1.0.6"
+    "azure-iot-device": "^1",
+    "azure-iot-device-amqp": "^1"
   }
 }
