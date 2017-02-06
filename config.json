@@ -10,22 +10,18 @@
     ],
     "modules": [
         {
-            "name": "node_printer",
+            "name": "printer",
             "loader": {
                 "name": "node",
-                "entrypoint": {
-                    "main.path": "./modules/printer.js"
-                }
+                "entrypoint": { "main.path": "./modules/printer.js" }
             },
             "args": null
         },
         {
-            "name": "node_sensor",
+            "name": "sensor",
             "loader": {
                 "name": "node",
-                "entrypoint": {
-                    "main.path": "./modules/sensor.js"
-                }
+                "entrypoint": { "main.path": "./modules/sensor.js" }
             },
             "args": null
         },
@@ -33,9 +29,7 @@
             "name": "iothub_writer",
             "loader": {
                 "name": "node",
-                "entrypoint": {
-                    "main.path": "./modules/iothub_writer.js"
-                }
+                "entrypoint": { "main.path": "./modules/iothub_writer.js" }
             },
             "args": {
                 "connection_string": "HostName=17minds-IoT-Hub.azure-devices.net;DeviceId=MySampleDevice;SharedAccessKey=Q/mO1uXTflJdF5PKQZbWHW3MUnbmwHulToXNtXBKyGs="
@@ -45,27 +39,14 @@
             "name": "Logger",
             "loader": {
                 "name": "native",
-                "entrypoint": {
-                    "module.path": "./bin/liblogger.so"
-                }
+                "entrypoint": { "module.path": "./bin/liblogger.so" }
             },
-            "args": {
-                "filename": "log.txt"
-            }
+            "args": { "filename": "log.txt" }
         }
     ],
     "links": [
-        {
-            "source": "*",
-            "sink": "Logger"
-        },
-        {
-            "source": "node_sensor",
-            "sink": "iothub_writer"
-        },
-        {
-            "source": "node_sensor",
-            "sink": "node_printer"
-        }
+        { "source": "*", "sink": "Logger" },
+        { "source": "sensor", "sink": "iothub_writer" },
+        { "source": "sensor", "sink": "printer" }
     ]
 }
