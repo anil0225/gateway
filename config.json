@@ -10,7 +10,7 @@
     ],
     "modules": [
         {
-            "name": "native_iothub",
+            "name": "native-iothub",
             "loader": {
                 "name": "native",
                 "entrypoint": {
@@ -50,11 +50,11 @@
             "args": null
         },
         {
-            "name": "sensor",
+            "name": "simulated-device",
             "loader": {
                 "name": "node",
                 "entrypoint": {
-                    "main.path": "./modules/sensor.js"
+                    "main.path": "./modules/simulated-device.js"
                 }
             },
             "args": null
@@ -90,16 +90,16 @@
             "sink": "Logger"
         },
         {
-            "source": "sensor",
+            "source": "simulated-device",
             "sink": "printer"
         },
         {
-            "source": "sensor",
+            "source": "simulated-device",
             "sink": "mapping"
         },
         {
             "source": "mapping",
-            "sink": "native_iothub"
+            "sink": "native-iothub"
         }
     ]
 }

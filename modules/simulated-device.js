@@ -7,34 +7,36 @@ module.exports = {
 
     create: function (broker, configuration) {
         this.broker = broker;
-        this.configuration = Object.assign({}, {
-            macAddress: 'AA:BB:CC:DD:EE:FF'
-        }, configuration);
+        this.configuration = Object.assign({},
+            { macAddress: 'AA:BB:CC:DD:EE:FF' },
+            configuration
+        );
 
         return true;
     },
 
     start: function () {
         this.intervalID = setInterval(() => {
+            let content = {
+                "eda": Math.floor(Math.random() * 40) + 10, //random 10-50
+                "bvp": Math.floor(Math.random() * 20) + 50 //random 50-70
+            };
             this.broker.publish({
                 properties: {
                     'source': 'sensor',
                     'macAddress': this.configuration.macAddress
                 },
-                content: new Uint8Array([
-                    Math.random() * 50,
-                    Math.random() * 50
-                ])
+                content: new Buffer(JSON.stringify(content), 'utf-8')
             });
         }, 500);
     },
 
-    receive: function(message) {
+    receive: function (message) {
     },
 
-    destroy: function() {
+    destroy: function () {
         console.log('sensor.destroy');
-        if(this.intervalID !== -1) {
+        if (this.intervalID !== -1) {
             clearInterval(this.intervalID);
         }
     }

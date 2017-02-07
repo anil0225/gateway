@@ -7,15 +7,12 @@ module.exports = {
     create: function (broker, configuration) {
         this.broker = broker;
         this.configuration = configuration;
-
         return true;
     },
 
     receive: function (message) {
-        console.log(`printer.receive - ${message.content}`);
+        console.log(`Received ${new Buffer(message.content).toString('utf-8')}`);
     },
 
-    destroy: function () {
-        console.log('printer.destroy');
-    }
+    destroy: function () { }
 };
