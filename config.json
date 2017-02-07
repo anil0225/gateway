@@ -78,7 +78,7 @@
                 }
             },
             "args": {
-                "connection_string": "HostName=17minds-IoT-Hub.azure-devices.net;DeviceId=MySampleDevice;SharedAccessKey=Q/mO1uXTflJdF5PKQZbWHW3MUnbmwHulToXNtXBKyGs="
+                "connection_string": "HostName=IoT-Hub-17minds.azure-devices.net;DeviceId=AnotherSampleDevice;SharedAccessKey=x+SoC92iBx42rF80d8vWSNPNJc6kHw4NQC1MEWByqrQ="
             }
         },
         {
