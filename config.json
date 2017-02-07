@@ -40,6 +40,16 @@
             ]
         },
         {
+            "name": "api",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/api.js"
+                }
+            },
+            "args": null
+        },
+        {
             "name": "printer",
             "loader": {
                 "name": "node",
@@ -90,16 +100,17 @@
             "sink": "Logger"
         },
         {
-            "source": "simulated-device",
+            "source": "api",
             "sink": "printer"
         },
         {
-            "source": "simulated-device",
+            "source": "api",
             "sink": "mapping"
         },
         {
             "source": "mapping",
             "sink": "native-iothub"
         }
+
     ]
 }
