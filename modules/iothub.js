@@ -38,7 +38,7 @@ class IotHubWriterModule
         if(this.configuration && this.configuration.connection_string) {
             // open a connection to the IoT Hub
             this.iothub_client = Client.fromConnectionString(this.configuration.connection_string, Protocol);
-            this.iothub_client.open(this.on_connect.bind(this));
+            // this.iothub_client.open(this.on_connect.bind(this));
 
             return true;
         }

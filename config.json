@@ -10,10 +10,42 @@
     ],
     "modules": [
         {
+            "name": "native_iothub",
+            "loader": {
+                "name": "native",
+                "entrypoint": {
+                    "module.path": "./bin/libiothub.so"
+                }
+            },
+            "args": {
+                "IoTHubName": "17minds-IoT-Hub",
+                "IoTHubSuffix": "azure-devices.net",
+                "Transport": "AMQP"
+            }
+        },
+        {
+            "name": "mapping",
+            "loader": {
+                "name": "native",
+                "entrypoint": {
+                    "module.path": "./bin/libidentity_map.so"
+                }
+            },
+            "args": [
+                {
+                    "macAddress": "AA:BB:CC:DD:EE:FF",
+                    "deviceId": "MySampleDevice",
+                    "deviceKey": "Q/mO1uXTflJdF5PKQZbWHW3MUnbmwHulToXNtXBKyGs="
+                }
+            ]
+        },
+        {
             "name": "printer",
             "loader": {
                 "name": "node",
-                "entrypoint": { "main.path": "./modules/printer.js" }
+                "entrypoint": {
+                    "main.path": "./modules/printer.js"
+                }
             },
             "args": null
         },
@@ -21,15 +53,19 @@
             "name": "sensor",
             "loader": {
                 "name": "node",
-                "entrypoint": { "main.path": "./modules/sensor.js" }
+                "entrypoint": {
+                    "main.path": "./modules/sensor.js"
+                }
             },
             "args": null
         },
         {
-            "name": "iothub_writer",
+            "name": "node_iothub",
             "loader": {
                 "name": "node",
-                "entrypoint": { "main.path": "./modules/iothub_writer.js" }
+                "entrypoint": {
+                    "main.path": "./modules/iothub.js"
+                }
             },
             "args": {
                 "connection_string": "HostName=17minds-IoT-Hub.azure-devices.net;DeviceId=MySampleDevice;SharedAccessKey=Q/mO1uXTflJdF5PKQZbWHW3MUnbmwHulToXNtXBKyGs="
@@ -39,14 +75,31 @@
             "name": "Logger",
             "loader": {
                 "name": "native",
-                "entrypoint": { "module.path": "./bin/liblogger.so" }
+                "entrypoint": {
+                    "module.path": "./bin/liblogger.so"
+                }
             },
-            "args": { "filename": "log.txt" }
+            "args": {
+                "filename": "log.txt"
+            }
         }
     ],
     "links": [
-        { "source": "*", "sink": "Logger" },
-        { "source": "sensor", "sink": "iothub_writer" },
-        { "source": "sensor", "sink": "printer" }
+        {
+            "source": "*",
+            "sink": "Logger"
+        },
+        {
+            "source": "sensor",
+            "sink": "printer"
+        },
+        {
+            "source": "sensor",
+            "sink": "mapping"
+        },
+        {
+            "source": "mapping",
+            "sink": "native_iothub"
+        }
     ]
 }
