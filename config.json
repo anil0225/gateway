@@ -18,7 +18,7 @@
                 }
             },
             "args": {
-                "IoTHubName": "17minds-IoT-Hub",
+                "IoTHubName": "IoT-Hub-17minds",
                 "IoTHubSuffix": "azure-devices.net",
                 "Transport": "AMQP"
             }
@@ -34,8 +34,8 @@
             "args": [
                 {
                     "macAddress": "AA:BB:CC:DD:EE:FF",
-                    "deviceId": "MySampleDevice",
-                    "deviceKey": "Q/mO1uXTflJdF5PKQZbWHW3MUnbmwHulToXNtXBKyGs="
+                    "deviceId": "AnotherSampleDevice",
+                    "deviceKey": "x+SoC92iBx42rF80d8vWSNPNJc6kHw4NQC1MEWByqrQ="
                 }
             ]
         },
