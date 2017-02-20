@@ -50,6 +50,26 @@
             "args": null
         },
         {
+            "name": "batch",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/batch.js"
+                }
+            },
+            "args": null
+        },
+        {
+            "name": "filter",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/filter.js"
+                }
+            },
+            "args": null
+        },
+        {
             "name": "printer",
             "loader": {
                 "name": "node",
