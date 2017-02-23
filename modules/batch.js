@@ -11,12 +11,12 @@ module.exports = {
     create: function (broker, configuration) {
         this.broker = broker;
         this.configuration = configuration;
-        this.subscription = this.messages
+        subscription = this.messages
             //use methods like buffer or window to batch data
             .subscribe(msg => broker.publish(msg));
         return true;
     },
 
     receive: msg => messages.onNext(msg),
-    destroy: this.subscription.unsubscribe
+    destroy: subscription.unsubscribe
 };
