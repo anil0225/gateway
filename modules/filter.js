@@ -18,5 +18,5 @@ module.exports = {
     },
 
     receive: msg => messages.onNext(msg),
-    destroy: () => { }
+    destroy: subscription.unsubscribe
 };
