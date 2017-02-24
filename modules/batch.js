@@ -2,7 +2,6 @@
 
 let Rx = require('rxjs/Rx')
 let messages = new Rx.Observable();
-let subscription;
 
 module.exports = {
     broker: null,
@@ -11,12 +10,15 @@ module.exports = {
     create: function (broker, configuration) {
         this.broker = broker;
         this.configuration = configuration;
-        this.subscription = this.messages
-            //use methods like buffer or window to batch data
-            .subscribe(msg => broker.publish(msg));
+        if(messages)
+            //proves that subscribe is a function
+            console.log(messages.subscribe);
+
+            //doesn't work and I don't know why
+            messages.subscribe(msg => broker.publish(msg))
         return true;
     },
 
     receive: msg => messages.onNext(msg),
-    destroy: this.subscription.unsubscribe
+    destroy: () => {}
 };
