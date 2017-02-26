@@ -13,15 +13,20 @@ module.exports = {
         this.broker = broker;
         this.configuration = configuration;
         this.subscription = messages
-            .flatMap(function(msg) {
+            .flatMap(function (msg) {
                 this.filter(msg => msg.edv && msg.edv > 20);
                 this.subscribe(msg => broker.publish(msg));
             }); //.subscribe(msg => broker.publish(msg));
         return true;
     },
 
-    receive: msg => messages.onNext(msg),
-    destroy: function() { 
-        subscription.unsubscribe;
-    }   
+    receive: function () {
+        messages.flatMap(function (msg) {
+            msg => messages.onNext(msg);
+        })
+    },
+    // subscription undefined without "this" prefix
+    destroy: function () {
+        this.subscription.unsubscribe;
+    }
 };
