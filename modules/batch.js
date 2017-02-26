@@ -24,9 +24,7 @@ module.exports = {
             msg => messages.onNext(msg);
         })
     },
-    // receive: msg => messages.onNext(msg),
     destroy: function () {
         this.subscription.unsubscribe;
-        // console.log("destroyed");
     }
 };
