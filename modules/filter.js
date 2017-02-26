@@ -8,6 +8,7 @@ module.exports = {
     configuration: null,
     messages: new Rx.Observable(),
 
+    // Chaining .subscribe above to the end of the flatMap call results in undefined error in gateway
     create: function (broker, configuration) {
         this.broker = broker;
         this.configuration = configuration;
@@ -16,13 +17,11 @@ module.exports = {
                 this.filter(msg => msg.edv && msg.edv > 20);
                 this.subscribe(msg => broker.publish(msg));
             }); //.subscribe(msg => broker.publish(msg));
-            // Chaining .subscribe above to the end of the flatMap call results in undefined error in gateway
         return true;
     },
 
     receive: msg => messages.onNext(msg),
     destroy: function() { 
         subscription.unsubscribe;
-        console.log("destroyed");
     }   
 };
