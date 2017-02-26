@@ -11,12 +11,18 @@ module.exports = {
     create: function (broker, configuration) {
         this.broker = broker;
         this.configuration = configuration;
-        // this.subscription = messages
-        //     .filter(msg => msg.edv && msg.edv > 20) //omit msgs with a low edv
-        //     .subscribe(msg => broker.publish(msg));
+        this.subscription = messages
+            .flatMap(function(msg) {
+                this.filter(msg => msg.edv && msg.edv > 20);
+                this.subscribe(msg => broker.publish(msg));
+            }); //.subscribe(msg => broker.publish(msg));
+            // Chaining .subscribe above to the end of the flatMap call results in undefined error in gateway
         return true;
     },
 
     receive: msg => messages.onNext(msg),
-    destroy: subscription.unsubscribe
+    destroy: function() { 
+        //subscription.unsubscribe
+        console.log("destroyed");
+    }   
 };

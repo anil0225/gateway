@@ -10,15 +10,21 @@ module.exports = {
     create: function (broker, configuration) {
         this.broker = broker;
         this.configuration = configuration;
-        if(messages)
+        if(messages) {
             //proves that subscribe is a function
+            console.log("messages");
             console.log(messages.subscribe);
+            console.log(messages);
 
             //doesn't work and I don't know why
-            messages.subscribe(msg => broker.publish(msg))
+            //messages.subscribe(msg => broker.publish(msg))
+        }
         return true;
     },
 
     receive: msg => messages.onNext(msg),
-    destroy: subscription.unsubscribe
+    destroy: function() { 
+        //subscription.unsubscribe
+        console.log("destroyed");
+    }  
 };

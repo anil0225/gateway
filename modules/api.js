@@ -31,7 +31,7 @@ module.exports = {
         return true;
     },
 
-    receive: function (message) {},
+    receive: function (message) { },
 
     destroy: function () {
         console.log('api.destroy');

@@ -120,7 +120,7 @@
             "sink": "Logger"
         },
         {
-            "source": "api",
+            "source": "*",
             "sink": "printer"
         },
         {

@@ -32,7 +32,7 @@
     ],
     "links": [
         {
-            "source": "api",
+            "source": "*",
             "sink": "printer"
         }
     ]
