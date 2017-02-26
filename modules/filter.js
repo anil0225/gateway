@@ -22,7 +22,7 @@ module.exports = {
 
     receive: msg => messages.onNext(msg),
     destroy: function() { 
-        //subscription.unsubscribe
+        subscription.unsubscribe;
         console.log("destroyed");
     }   
 };
