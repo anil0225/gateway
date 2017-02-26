@@ -125,6 +125,14 @@
         },
         {
             "source": "api",
+            "sink": "filter"
+        },
+        {
+            "source": "filter",
+            "sink": "batch"
+        },
+        {
+            "source": "batch",
             "sink": "mapping"
         },
         {
