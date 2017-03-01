@@ -4,7 +4,7 @@
             "type": "node",
             "name": "node",
             "configuration": {
-                "binding.path": "./bin/libnodejs_binding.so"
+                "binding.path": "./bin/nodejs_binding.dll"
             }
         }
     ],
@@ -14,7 +14,7 @@
             "loader": {
                 "name": "native",
                 "entrypoint": {
-                    "module.path": "./bin/libiothub.so"
+                    "module.path": "./bin/iothub.dll"
                 }
             },
             "args": {
@@ -28,7 +28,7 @@
             "loader": {
                 "name": "native",
                 "entrypoint": {
-                    "module.path": "./bin/libidentity_map.so"
+                    "module.path": "./bin/identity_map.dll"
                 }
             },
             "args": [
@@ -106,7 +106,7 @@
             "loader": {
                 "name": "native",
                 "entrypoint": {
-                    "module.path": "./bin/liblogger.so"
+                    "module.path": "./bin/logger.dll"
                 }
             },
             "args": {
