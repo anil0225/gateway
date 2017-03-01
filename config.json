@@ -50,16 +50,6 @@
             "args": null
         },
         {
-            "name": "batch",
-            "loader": {
-                "name": "node",
-                "entrypoint": {
-                    "main.path": "./modules/batch.js"
-                }
-            },
-            "args": null
-        },
-        {
             "name": "filter",
             "loader": {
                 "name": "node",
@@ -67,7 +57,23 @@
                     "main.path": "./modules/filter.js"
                 }
             },
-            "args": null
+            "args": {
+                "eda_min": "20",
+                "eda_max": "40"
+            }
+        },
+        {
+            "name": "batch",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/batch.js"
+                }
+            },
+            "args": {
+                "count": 10,
+                "time": 5
+            }
         },
         {
             "name": "printer",

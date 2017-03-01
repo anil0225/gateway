@@ -1,24 +1,29 @@
 'use strict';
 
-let Rx = require('rxjs/Rx')
-let messages = new Rx.Observable();
+let Rx = require('rxjs/Rx');
 
-module.exports = {
-    broker: null,
-    configuration: null,
-
-    create: function (broker, configuration) {
+class BatchModule {
+    create(broker, configuration) {
         this.broker = broker;
         this.configuration = configuration;
-        if(messages)
-            //proves that subscribe is a function
-            console.log(messages.subscribe);
+        this.messages = new Rx.Subject();
+        this.subscription = this.messages
 
-            //doesn't work and I don't know why
-            messages.subscribe(msg => broker.publish(msg))
+            //magic happens here
+
+            .subscribe(msg => {
+                this.broker.publish(msg);
+            })
         return true;
-    },
+    }
 
-    receive: msg => messages.onNext(msg),
-    destroy: subscription.unsubscribe
-};
+    receive(msg) {
+        this.subscription = this.messages.next(msg);
+    }
+
+    destroy() {
+        this.subscription.unsubscribe();
+    }
+}
+
+module.exports = new BatchModule();
