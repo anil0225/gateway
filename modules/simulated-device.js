@@ -14,6 +14,7 @@ module.exports = {
 
         return true;
     },
+
     start: function () {
         this.intervalID = setInterval(() => {
             let content = {
@@ -29,7 +30,10 @@ module.exports = {
             });
         }, 500);
     },
-    receive: function (message) {},
+
+    receive: function (message) {
+    },
+
     destroy: function () {
         console.log('sensor.destroy');
         if (this.intervalID !== -1) {

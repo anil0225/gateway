@@ -40,16 +40,6 @@
             ]
         },
         {
-            "name": "aggregate",
-            "loader": {
-                "name": "node",
-                "entrypoint": {
-                    "main.path": "./modules/aggregate.js"
-                }
-            },
-            "args": null
-        },
-        {
             "name": "api",
             "loader": {
                 "name": "node",
@@ -135,10 +125,6 @@
         },
         {
             "source": "api",
-            "sink": "aggregate"
-        },
-        {
-            "source": "aggregate",
             "sink": "filter"
         },
         {
