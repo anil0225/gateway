@@ -1,27 +1,30 @@
 'use strict';
 
-let Rx = require('rxjs/Rx')
-let messages = new Rx.Observable();
+let Rx = require('rxjs/Rx');
 
-module.exports = {
-    broker: null,
-    configuration: null,
-    messages: new Rx.Observable(),
-
-    // Chaining .subscribe above to the end of the flatMap call results in undefined error in gateway
-    create: function (broker, configuration) {
+class FilterModule {
+    create(broker, configuration) {
         this.broker = broker;
         this.configuration = configuration;
-        this.subscription = messages
-            .flatMap(function(msg) {
-                this.filter(msg => msg.edv && msg.edv > 20);
-                this.subscribe(msg => broker.publish(msg));
-            }); //.subscribe(msg => broker.publish(msg));
+        this.messages = new Rx.Subject();
+        this.subscription = this.messages
+            .filter(msg => {
+                msg = JSON.parse(new Buffer(msg.content).toString('utf-8'));
+                return msg.eda >= this.configuration.eda_min && msg.eda <= this.configuration.eda_max;
+            })
+            .subscribe(msg => {
+                this.broker.publish(msg);
+            })
         return true;
-    },
+    }
 
-    receive: msg => messages.onNext(msg),
-    destroy: function() { 
-        subscription.unsubscribe;
-    }   
-};
+    receive(msg) {
+        this.subscription = this.messages.next(msg);
+    }
+
+    destroy() {
+        this.subscription.unsubscribe();
+    }
+}
+
+module.exports = new FilterModule();

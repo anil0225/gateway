@@ -67,7 +67,10 @@
                     "main.path": "./modules/filter.js"
                 }
             },
-            "args": null
+            "args": {
+                "eda_min": "20",
+                "eda_max": "40"
+            }
         },
         {
             "name": "printer",
