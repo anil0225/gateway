@@ -1,0 +1,10 @@
+{
+    "name": "filterjs",
+    "version": "0.0.1",
+    "description": "Used to filter data based on specified parameters using ReactiveX",
+    "author": "James Earle",
+
+    "dependencies": {
+        "rxjs": "5.1.0"
+    }
+}
