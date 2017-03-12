@@ -9,8 +9,10 @@ class BatchModule {
         this.messages = new Rx.Subject()
         this.subscription = this.messages
 	    // buffer for 5 seconds, start next buffer in 1 second
-	    .bufferTime(5000, 5000)
+	    .buffer(this.messages)
+	    .bufferTime(5000)
             .subscribe(msg => {     
+		console.log('Buffered:', msg)
 		this.broker.publish(msg)
             })
         return true
