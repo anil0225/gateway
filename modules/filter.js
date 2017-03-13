@@ -20,6 +20,7 @@ class FilterModule {
 
     receive(msg) {
         this.subscription = this.messages.next(msg);
+	console.log('FILTER RECEIVE')
     }
 
     destroy() {

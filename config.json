@@ -128,10 +128,6 @@
         },
         {
             "source": "api",
-            "sink": "filter"
-        },
-        {
-            "source": "filter",
             "sink": "batch"
         },
         {
@@ -142,6 +138,5 @@
             "source": "mapping",
             "sink": "native-iothub"
         }
-
     ]
 }

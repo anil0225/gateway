@@ -7,19 +7,21 @@ class BatchModule {
         this.broker = broker
         this.configuration = configuration
         this.messages = new Rx.Subject()
-        this.subscription = this.messages
-	    // buffer for 5 seconds, start next buffer in 1 second
-	    .buffer(this.messages)
 	    .bufferTime(5000)
-            .subscribe(msg => {     
-		console.log('Buffered:', msg)
-		this.broker.publish(msg)
+        this.subscription = this.messages
+            .subscribe(msgs => {
+	       	console.log('*** Buffered:', msgs)
+ 		
+		// msgs is missing property: properties and content 
+		this.broker.publish(msgs)
             })
         return true
     }
 
     receive(msg) {
+	msg = JSON.parse(new Buffer(msg.content).toString('utf-8')) 
         this.subscription = this.messages.next(msg)
+	console.log('BATCH RECIEVED')
     }
 
     destroy() {
