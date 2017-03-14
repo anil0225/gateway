@@ -142,17 +142,17 @@
         }
     ],
     "links": [
-        { 
-            "source": "simulated-device", 
-            "sink": "filter" 
-        }, 
-        { 
-            "source": "filter", 
-            "sink": "batch" 
-        }, 
-        { 
-            "source": "batch", 
-            "sink": "printer" 
-        } 
-    ] 
+        {
+            "source": "simulated-device",
+            "sink": "filter"
+        },
+        {
+            "source": "filter",
+            "sink": "batch"
+        },
+        {
+            "source": "batch",
+            "sink": "printer"
+        }
+    ]
 }
