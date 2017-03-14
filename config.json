@@ -57,7 +57,9 @@
                     "main.path": "./modules/batch.js"
                 }
             },
-            "args": null
+            "args": {
+                "batch_time": 5000 
+            }
         },
         {
             "name": "filter",
@@ -117,7 +119,7 @@
             }
         }
     ],
-    "links": [
+    "disabled_links": [
         {
             "source": "*",
             "sink": "Logger"
@@ -138,5 +140,19 @@
             "source": "mapping",
             "sink": "native-iothub"
         }
-    ]
+    ],
+    "links": [
+        { 
+            "source": "simulated-device", 
+            "sink": "filter" 
+        }, 
+        { 
+            "source": "filter", 
+            "sink": "batch" 
+        }, 
+        { 
+            "source": "batch", 
+            "sink": "printer" 
+        } 
+    ] 
 }
