@@ -117,7 +117,7 @@
             }
         }
     ],
-    "links": [
+    "disabled_links": [
         {
             "source": "*",
             "sink": "Logger"
@@ -137,6 +137,20 @@
         {
             "source": "mapping",
             "sink": "native-iothub"
+        }
+    ],
+    "links": [
+        {
+            "source": "simulated-device",
+            "sink": "filter"
+        },
+        {
+            "source": "filter",
+            "sink": "batch"
+        },
+        {
+            "source": "batch",
+            "sink": "printer"
         }
     ]
 }
