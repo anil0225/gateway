@@ -1,5 +1,7 @@
 'use strict';
 
+let utf8 = require('./util').utf8;
+
 module.exports = {
     broker: null,
     configuration: null,
@@ -26,7 +28,7 @@ module.exports = {
                     'source': 'sensor',
                     'macAddress': this.configuration.macAddress
                 },
-                content: new Buffer(JSON.stringify(content), 'utf-8')
+                content: utf8.encode(content)
             });
         }, 500);
     },

@@ -1,6 +1,7 @@
 'use strict';
 
 let Rx = require('rxjs/Rx');
+let utf8 = require('./util').utf8;
 
 class FilterModule {
     create(broker, configuration) {
@@ -9,7 +10,7 @@ class FilterModule {
         this.messages = new Rx.Subject();
         this.subscription = this.messages
             .filter(msg => {
-                msg = JSON.parse(new Buffer(msg.content).toString('utf-8'));
+                msg = JSON.parse(utf8.decode(msg.content));
                 return msg.eda >= this.configuration.eda_min && msg.eda <= this.configuration.eda_max;
             })
             .subscribe(msg => {

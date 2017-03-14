@@ -1,5 +1,7 @@
 'use strict';
 
+let utf8 = require('./util').utf8;
+
 module.exports = {
     broker: null,
     configuration: null,
@@ -11,7 +13,7 @@ module.exports = {
     },
 
     receive: function (message) {
-        console.log(`Received ${new Buffer(message.content).toString('utf-8')}`);
+        console.log(`Received ${utf8.decode(message.content)}`);
     },
 
     destroy: function () { }
