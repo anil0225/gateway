@@ -57,7 +57,9 @@
                     "main.path": "./modules/batch.js"
                 }
             },
-            "args": null
+            "args": {
+                "batch_time": 5000
+            }
         },
         {
             "name": "filter",
