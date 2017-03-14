@@ -12,11 +12,11 @@ class BatchModule {
 	  .map(m => JSON.parse(utf8.decode(m.content)))
 	  .bufferTime(this.configuration.batch_time)
 	  .subscribe(b => {
-    this.broker.publish({
-          properties: { 'source': 'batch' },
-          content: utf8.encode(b)
-        })
-  })
+              this.broker.publish({
+                  properties: { 'source': 'batch' },
+                  content: utf8.encode(b)
+              })
+          })
     return true
   }
 
