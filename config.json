@@ -96,6 +96,6 @@
         { "source": "simulated-device", "sink": "filter" },
         { "source": "filter", "sink": "batch" },
         { "source": "batch", "sink": "printer" },
-        { "source": "mapping", "sink": "native-iothub" }
+        { "source": "batch", "sink": "native-iothub" }
     ]
 }
