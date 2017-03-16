@@ -10,34 +10,14 @@
     ],
     "modules": [
         {
-            "name": "native-iothub",
+            "name": "simulated-device",
             "loader": {
-                "name": "native",
+                "name": "node",
                 "entrypoint": {
-                    "module.path": "./bin/libiothub.so"
+                    "main.path": "./modules/simulated-device.js"
                 }
             },
-            "args": {
-                "IoTHubName": "IoT-Hub-17minds",
-                "IoTHubSuffix": "azure-devices.net",
-                "Transport": "AMQP"
-            }
-        },
-        {
-            "name": "mapping",
-            "loader": {
-                "name": "native",
-                "entrypoint": {
-                    "module.path": "./bin/libidentity_map.so"
-                }
-            },
-            "args": [
-                {
-                    "macAddress": "AA:BB:CC:DD:EE:FF",
-                    "deviceId": "AnotherSampleDevice",
-                    "deviceKey": "x+SoC92iBx42rF80d8vWSNPNJc6kHw4NQC1MEWByqrQ="
-                }
-            ]
+            "args": null
         },
         {
             "name": "api",
@@ -57,7 +37,9 @@
                     "main.path": "./modules/batch.js"
                 }
             },
-            "args": null
+            "args": {
+                "batch_time": 5000 
+            }
         },
         {
             "name": "filter",
@@ -83,29 +65,7 @@
             "args": null
         },
         {
-            "name": "simulated-device",
-            "loader": {
-                "name": "node",
-                "entrypoint": {
-                    "main.path": "./modules/simulated-device.js"
-                }
-            },
-            "args": null
-        },
-        {
-            "name": "node_iothub",
-            "loader": {
-                "name": "node",
-                "entrypoint": {
-                    "main.path": "./modules/iothub.js"
-                }
-            },
-            "args": {
-                "connection_string": "HostName=IoT-Hub-17minds.azure-devices.net;DeviceId=AnotherSampleDevice;SharedAccessKey=x+SoC92iBx42rF80d8vWSNPNJc6kHw4NQC1MEWByqrQ="
-            }
-        },
-        {
-            "name": "Logger",
+            "name": "logger",
             "loader": {
                 "name": "native",
                 "entrypoint": {
@@ -115,46 +75,27 @@
             "args": {
                 "filename": "log.txt"
             }
-        }
-    ],
-    "disabled_links": [
-        {
-            "source": "*",
-            "sink": "Logger"
         },
         {
-            "source": "*",
-            "sink": "printer"
-        },
-        {
-            "source": "api",
-            "sink": "filter"
-        },
-        {
-            "source": "filter",
-            "sink": "batch"
-        },
-        {
-            "source": "batch",
-            "sink": "mapping"
-        },
-        {
-            "source": "mapping",
-            "sink": "native-iothub"
+            "name": "native-iothub",
+            "loader": {
+                "name": "native",
+                "entrypoint": {
+                    "module.path": "./bin/libiothub.so"
+                }
+            },
+            "args": {
+                "IoTHubName": "IoT-Hub-17minds",
+                "IoTHubSuffix": "azure-devices.net",
+                "Transport": "AMQP"
+            }
         }
     ],
     "links": [
-        {
-            "source": "simulated-device",
-            "sink": "filter"
-        },
-        {
-            "source": "filter",
-            "sink": "batch"
-        },
-        {
-            "source": "batch",
-            "sink": "printer"
-        }
+        { "source": "*", "sink": "logger" },
+        { "source": "simulated-device", "sink": "filter" },
+        { "source": "filter", "sink": "batch" },
+        { "source": "batch", "sink": "printer" },
+        { "source": "batch", "sink": "native-iothub" }
     ]
 }

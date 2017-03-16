@@ -1,26 +1,32 @@
-'use strict';
+'use strict'
 
 let Rx = require('rxjs/Rx')
-let messages = new Rx.Observable();
+let utf8 = require('./util').utf8
 
-module.exports = {
-    broker: null,
-    configuration: null,
+class BatchModule {
+  create(broker, configuration) {
+    this.broker = broker
+    this.configuration = configuration
+    this.messages = new Rx.Subject()
+    this.subscription = this.messages
+      .map(m => JSON.parse(utf8.decode(m.content)))
+      .bufferTime(this.configuration.batch_time)
+      .subscribe(b => {
+        this.broker.publish({
+          properties: { 'source': 'batch' },
+          content: utf8.encode(b)
+        })
+      })
+    return true
+  }
 
-    create: function (broker, configuration) {
-        this.broker = broker;
-        this.configuration = configuration;
+  receive(msg) {
+    this.messages.next(msg)
+  }
 
-        if (messages) {
-            messages.flatMap(function (msg) {
-                this.subscribe(msg => broker.publish(msg));
-            });
-        }
-        return true;
-    },
+  destroy() {
+    this.subscription.unsubscribe()
+  }
+}
 
-    receive: msg => messages.onNext(msg),
-    destroy: function () {
-        subscription.unsubscribe;
-    }
-};
+module.exports = new BatchModule()
