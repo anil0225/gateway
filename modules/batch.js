@@ -4,27 +4,27 @@ let Rx = require('rxjs/Rx')
 let utf8 = require('./util').utf8
 
 class BatchModule {
-  create (broker, configuration) {
+  create(broker, configuration) {
     this.broker = broker
     this.configuration = configuration
     this.messages = new Rx.Subject()
     this.subscription = this.messages
-	  .map(m => JSON.parse(utf8.decode(m.content)))
-	  .bufferTime(this.configuration.batch_time)
-	  .subscribe(b => {
-              this.broker.publish({
-                  properties: { 'source': 'batch' },
-                  content: utf8.encode(b)
-              })
-          })
+      .map(m => JSON.parse(utf8.decode(m.content)))
+      .bufferTime(this.configuration.batch_time)
+      .subscribe(b => {
+        this.broker.publish({
+          properties: { 'source': 'batch' },
+          content: utf8.encode(b)
+        })
+      })
     return true
   }
 
-  receive (msg) {
+  receive(msg) {
     this.messages.next(msg)
   }
 
-  destroy () {
+  destroy() {
     this.subscription.unsubscribe()
   }
 }

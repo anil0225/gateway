@@ -8,38 +8,30 @@ module.exports = {
   intervalID: -1,
 
   create: function (broker, configuration) {
-    this.broker = broker
-    this.configuration = Object.assign({},
-            { macAddress: 'AA:BB:CC:DD:EE:FF' },
-            configuration
-        )
-
-    return true
+    this.broker = broker;
+    this.configuration = configuration;
+    return true;
   },
 
   start: function () {
     this.intervalID = setInterval(() => {
       let content = {
-          'eda': Math.floor(Math.random() * 40) + 10, // random 10-50
-          'bvp': Math.floor(Math.random() * 20) + 50 // random 50-70
-        }
+        'eda': Math.floor(Math.random() * 40) + 10, // random 10-50
+        'bvp': Math.floor(Math.random() * 20) + 50 // random 50-70
+      };
       this.broker.publish({
-          properties: {
-              'source': 'sensor',
-              'macAddress': this.configuration.macAddress
-            },
-          content: utf8.encode(content)
-        })
-    }, 500)
+        properties: {
+          'source': 'simulated-device',
+        },
+        content: utf8.encode(content)
+      });
+    }, 500);
   },
 
-  receive: function (message) {
-  },
+  receive: function (message) {},
 
   destroy: function () {
-    console.log('sensor.destroy')
-    if (this.intervalID !== -1) {
+    if (this.intervalID !== -1) 
       clearInterval(this.intervalID)
-    }
   }
 }
