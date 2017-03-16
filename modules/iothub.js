@@ -1,3 +1,6 @@
+// This module is having issues in the hub, so we'll leave it
+// here, but have configured the native iot hub module for now
+
 'use strict';
 
 let Protocol = require('azure-iot-device-amqp').Amqp;
