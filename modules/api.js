@@ -1,6 +1,7 @@
 'use strict';
 
 let restify = require('restify');
+let utf8 = require('./util').utf8
 
 module.exports = {
     broker: null,
@@ -20,10 +21,9 @@ module.exports = {
         server.post('/api/messages', (req, res, next) => {
             this.broker.publish({
                 properties: {
-                    'source': 'api',
-                    'macAddress': this.configuration.macAddress
+                    'source': 'api'
                 },
-                content: new Buffer(req.body, 'utf-8')
+                content: utf8.encode(req.body)
             });
         });
         server.listen(3000);

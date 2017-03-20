@@ -93,6 +93,7 @@
     ],
     "links": [
         { "source": "*", "sink": "logger" },
+        { "source": "api", "sink": "filter" },
         { "source": "simulated-device", "sink": "filter" },
         { "source": "filter", "sink": "batch" },
         { "source": "batch", "sink": "printer" },
