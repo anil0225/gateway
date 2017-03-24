@@ -38,7 +38,7 @@
                 }
             },
             "args": {
-                "batch_time": 5000 
+                "batch_time": 5000
             }
         },
         {
@@ -77,6 +77,19 @@
             }
         },
         {
+            "name": "mapping",
+            "loader": {
+                "name": "node",
+                "entrypoint": {
+                    "main.path": "./modules/mapping.js"
+                }
+            },
+            "args": {
+                "deviceName": "gateway",
+                "deviceKey": "zgbBUYVXEoxyIRpdz4LjppMNmjrMe6vPV4rMYxmaNj0="
+            }
+        },
+        {
             "name": "native-iothub",
             "loader": {
                 "name": "native",
@@ -96,7 +109,8 @@
         { "source": "api", "sink": "filter" },
         { "source": "simulated-device", "sink": "filter" },
         { "source": "filter", "sink": "batch" },
-        { "source": "batch", "sink": "printer" },
-        { "source": "batch", "sink": "native-iothub" }
+        { "source": "batch", "sink": "mapping" },
+        { "source": "mapping", "sink": "printer" },
+        { "source": "mapping", "sink": "native-iothub" }
     ]
 }

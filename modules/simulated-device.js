@@ -16,22 +16,20 @@ module.exports = {
   start: function () {
     this.intervalID = setInterval(() => {
       let content = {
-        'eda': Math.floor(Math.random() * 40) + 10, // random 10-50
-        'bvp': Math.floor(Math.random() * 20) + 50 // random 50-70
+        eda: Math.floor(Math.random() * 40) + 10, //random 10-50
+        bvp: Math.floor(Math.random() * 20) + 50 //random 50-70
       };
       this.broker.publish({
-        properties: {
-          'source': 'simulated-device',
-        },
+        properties: { source: 'simulated-device' },
         content: utf8.encode(content)
       });
     }, 500);
   },
 
-  receive: function (message) {},
+  receive: function (message) { },
 
   destroy: function () {
-    if (this.intervalID !== -1) 
+    if (this.intervalID !== -1)
       clearInterval(this.intervalID)
   }
 }

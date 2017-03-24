@@ -11,10 +11,7 @@ module.exports = {
         this.broker = broker;
 
         //TODO: hard code mac address for now
-        this.configuration = Object.assign({},
-            { macAddress: 'AA:BB:CC:DD:EE:FF' },
-            configuration
-        );
+        this.configuration = configuration;
 
         let server = restify.createServer();
         server.use(restify.bodyParser());
