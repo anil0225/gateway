@@ -13,7 +13,11 @@ class BatchModule {
       .bufferTime(this.configuration.batch_time)
       .subscribe(b => {
         this.broker.publish({
-          properties: { 'source': 'batch' },
+          properties: {
+            'source': 'batch',
+            'deviceName': 'gateway',
+            'deviceKey': 'zgbBUYVXEoxyIRpdz4LjppMNmjrMe6vPV4rMYxmaNj0='
+          },
           content: utf8.encode(b)
         })
       })
