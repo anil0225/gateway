@@ -13,7 +13,9 @@ module.exports = {
   },
 
   receive: function (message) {
-    console.log(`Received ${utf8.decode(message.content)}`)
+    console.log(`MESSAGE`)
+    console.log(`Header: ${JSON.stringify(message.properties)}`);
+    console.log(`Content: ${utf8.decode(message.content)}`)
   },
 
   destroy: function () { }
