@@ -1,0 +1,1 @@
+SELECT eventprocessedutctime, eda, bvp INTO blob FROM iothub
