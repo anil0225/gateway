@@ -13,7 +13,7 @@ module.exports = {
   },
 
   receive: function (message) {
-    console.log(`MESSAGE`)
+    console.log(`\nMESSAGE`)
     console.log(`Header: ${JSON.stringify(message.properties)}`);
     console.log(`Content: ${utf8.decode(message.content)}`)
   },
